@@ -183,8 +183,8 @@ elif page == "관리자 페이지":
             ) = row
             if hide_done and done:
                 continue
-            header = f"테이블 {table_no} @ {ts}"
-            with st.expander(header, expanded=True):
+            header = f"테이블 {table_no} / {cust} @ {ts}"
+            with st.expander(header, expanded=False, icon="❌" if not done else "✅"):
                 st.write(f"**주문자**: {cust}")
                 menu_items = [
                     ("치즈 감자전", chz), ("우삼겹 숙주 볶음", beef),
@@ -217,8 +217,7 @@ elif page == "관리자 페이지":
                         for name, qty in menu_items:
                             for i in range(qty):
                                 checked = st.checkbox(
-                                    f"{name} #{i+1}", key=f"{order_id}_{name}_{i}"
-                                )
+                                    f"{name} #{i+1}", key=f"{order_id}_{name}_{i}")
                                 checks.append(checked)
                         if checks and all(checks):
                             c.execute(
@@ -227,6 +226,7 @@ elif page == "관리자 페이지":
                             )
                             conn.commit()
                             st.success(f"🎉 테이블 {table_no}의 주문이 완료 처리되었습니다.")
+                            st.write()
                     else:
                         st.success("✅ 주문이 완료된 상태입니다.")
 
