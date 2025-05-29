@@ -139,9 +139,8 @@ if page == "주문 페이지":
                     fried_chickenN, fried_chickenU, butter_shrimp, hot_dog, ice_mango,
                     blue_lagoon, screwdriver, midori, sea_breeze,
                     tropical, blue_lagoon_na, screwdriver_na,
-                    midori_na, sea_breeze_na, tropical_na,
-                    order_Done, timestamp)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    midori_na, sea_breeze_na, tropical_na, timestamp)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ''',
                 (
                     table_number, customer_name,
