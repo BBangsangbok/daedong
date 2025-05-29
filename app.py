@@ -134,14 +134,14 @@ if page == "주문 페이지":
             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             c.execute(
                 '''INSERT INTO orders
-                   (table_number, customer_name,
+                (table_number, customer_name,
                     cheese_cake, beef_stir_fry, beef_with_mara, canape, fried_egg,
                     fried_chickenN, fried_chickenU, butter_shrimp, hot_dog, ice_mango,
                     blue_lagoon, screwdriver, midori, sea_breeze,
                     tropical, blue_lagoon_na, screwdriver_na,
                     midori_na, sea_breeze_na, tropical_na,
-                    timestamp)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    order_Done, timestamp)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ''',
                 (
                     table_number, customer_name,
