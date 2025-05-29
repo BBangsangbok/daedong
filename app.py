@@ -141,7 +141,7 @@ if page == "주문 페이지":
                     tropical, blue_lagoon_na, screwdriver_na,
                     midori_na, sea_breeze_na, tropical_na,
                     order_Done, timestamp)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ''',
                 (
                     table_number, customer_name,
