@@ -26,10 +26,14 @@ def init_db():
         'customer_name':    "TEXT DEFAULT ''",
         'cheese_cake':      'INTEGER DEFAULT 0',
         'beef_stir_fry':    'INTEGER DEFAULT 0',
+        'beef_with_mara':   'INTEGER DEFAULT 0',
         'canape':           'INTEGER DEFAULT 0',
         'fried_egg':        'INTEGER DEFAULT 0',
-        'fried_chicken':    'INTEGER DEFAULT 0',
+        'fried_chickenN':   'INTEGER DEFAULT 0',
+        'fried_chickenU':   'INTEGER DEFAULT 0',
         'butter_shrimp':    'INTEGER DEFAULT 0',
+        'Hot_dog':          'INTEGER DEFAULT 0',
+        'ice_mango':        'INTEGER DEFAULT 0',
         'blue_lagoon':      'INTEGER DEFAULT 0',
         'screwdriver':      'INTEGER DEFAULT 0',
         'midori':           'INTEGER DEFAULT 0',
@@ -54,22 +58,26 @@ conn, c = init_db()
 
 # 가격 설정 (메뉴별 단가)
 PRICE_MAP = {
-    "치즈 감자전": 100,
-    "우삼겹 숙주 볶음": 200,
-    "카나페": 300,
-    "후라이": 400,
-    "가라아게": 500,
-    "버터 새우": 600,
-    "블루 라군": 700,
-    "스크루 드라이버": 800,
-    "미도리 사워": 900,
-    "시 브리즈": 1000,
-    "트로피컬 선라이즈": 1100,
-    "블루 라군 (논알콜)": 1200,
-    "스크루 드라이버 (논알콜)": 1300,
-    "미도리 사워 (논알콜)": 1400,
-    "시 브리즈 (논알콜)": 1500,
-    "트로피컬 선라이즈 (논알콜)": 1600
+    "치즈 감자전": 16000,
+    "우삼겹 숙주 볶음": 16000,
+    "우삼겹 숙주 볶음 (마라)": 16000,  # 추가된 메뉴
+    "카나페": 7000,
+    "후라이": 10000,
+    "치킨 난반": 17000,
+    "유린기": 17000,
+    "버터 새우": 17000,
+    "핫도그": 4000,
+    "아망추": 4000,
+    "블루 라군": 6500,
+    "스크루 드라이버": 6500,
+    "미도리 사워": 6500,
+    "시 브리즈": 6500,
+    "트로피컬 선라이즈": 6500,
+    "블루 라군 (논알콜)": 6500,
+    "스크루 드라이버 (논알콜)": 6500,
+    "미도리 사워 (논알콜)": 6500,
+    "시 브리즈 (논알콜)": 6500,
+    "트로피컬 선라이즈 (논알콜)": 6500
 }
 
 # 사이드바 페이지 선택 및 필터 설정
@@ -89,10 +97,14 @@ if page == "주문 페이지":
         st.subheader("🍽️ 음식")
         cheese_cake    = st.number_input("치즈 감자전", min_value=0, max_value=5, value=0)
         beef_stir_fry  = st.number_input("우삼겹 숙주 볶음", min_value=0, max_value=5, value=0)
+        beef_with_mara = st.number_input("우삼겹 숙주 볶음 (마라)", min_value=0, max_value=5, value=0)
         canape         = st.number_input("카나페", min_value=0, max_value=5, value=0)
         fried_egg      = st.number_input("후라이", min_value=0, max_value=5, value=0)
-        fried_chicken  = st.number_input("가라아게", min_value=0, max_value=5, value=0)
+        fried_chickenN = st.number_input("치킨 난반", min_value=0, max_value=5, value=0)
+        fried_chickenU = st.number_input("유린기", min_value=0, max_value=5, value=0)
         butter_shrimp  = st.number_input("버터 새우", min_value=0, max_value=5, value=0)
+        hot_dog        = st.number_input("핫도그", min_value=0, max_value=5, value=0)
+        ice_mango      = st.number_input("아망추", min_value=0, max_value=5, value=0)
     with col2:
         st.subheader("🍹 칵테일")
         blue_lagoon   = st.number_input("블루 라군", min_value=0, max_value=5, value=0)
@@ -112,8 +124,8 @@ if page == "주문 페이지":
         if not customer_name:
             st.warning("주문자 이름을 입력해주세요.")
         elif not any([
-            cheese_cake, beef_stir_fry, canape, fried_egg, fried_chicken,
-            butter_shrimp, blue_lagoon, screwdriver, midori, sea_breeze,
+            cheese_cake, beef_stir_fry, beef_with_mara, canape, fried_egg, fried_chickenN,
+            fried_chickenU, butter_shrimp, hot_dog, ice_mango, blue_lagoon, screwdriver, midori, sea_breeze,
             tropical, blue_lagoon_na, screwdriver_na, midori_na,
             sea_breeze_na, tropical_na
         ]):
@@ -123,8 +135,8 @@ if page == "주문 페이지":
             c.execute(
                 '''INSERT INTO orders
                    (table_number, customer_name,
-                    cheese_cake, beef_stir_fry, canape, fried_egg,
-                    fried_chicken, butter_shrimp,
+                    cheese_cake, beef_stir_fry, beef_with_mara, canape, fried_egg,
+                    fried_chickenN, fried_chickenU, butter_shrimp, hot_dog, ice_mango,
                     blue_lagoon, screwdriver, midori, sea_breeze,
                     tropical, blue_lagoon_na, screwdriver_na,
                     midori_na, sea_breeze_na, tropical_na,
@@ -133,8 +145,8 @@ if page == "주문 페이지":
                 ''',
                 (
                     table_number, customer_name,
-                    cheese_cake, beef_stir_fry, canape, fried_egg,
-                    fried_chicken, butter_shrimp,
+                    cheese_cake, beef_stir_fry, beef_with_mara, canape, fried_egg,
+                    fried_chickenN, fried_chickenU, butter_shrimp, hot_dog, ice_mango,
                     blue_lagoon, screwdriver, midori, sea_breeze,
                     tropical, blue_lagoon_na, screwdriver_na,
                     midori_na, sea_breeze_na, tropical_na,
@@ -159,9 +171,9 @@ elif page == "관리자 페이지":
 
     c.execute(
         '''SELECT id, table_number, customer_name,
-                   cheese_cake, beef_stir_fry, canape, fried_egg,
-                   fried_chicken, butter_shrimp, blue_lagoon,
-                   screwdriver, midori, sea_breeze, tropical,
+                   cheese_cake, beef_stir_fry, beef_with_mara, canape, fried_egg,
+                   fried_chickenN, fried_chickenU, butter_shrimp, hot_dog, ice_mango,
+                   blue_lagoon, screwdriver, midori, sea_breeze, tropical,
                    blue_lagoon_na, screwdriver_na, midori_na,
                    sea_breeze_na, tropical_na, order_Done, timestamp
            FROM orders
@@ -175,8 +187,8 @@ elif page == "관리자 페이지":
         for row in rows:
             (
                 order_id, table_no, cust,
-                chz, beef, canp, egg,
-                chick, shrp, blue, screw,
+                chz, beef, beef_mara, canp, egg,
+                chickN, chickU, shrp, hot_dog, ice_mango, blue, screw,
                 mid, sea, trop, blue_na,
                 screw_na, mid_na, sea_na,
                 trop_na, done, ts
@@ -188,8 +200,10 @@ elif page == "관리자 페이지":
                 st.write(f"**주문자**: {cust}")
                 menu_items = [
                     ("치즈 감자전", chz), ("우삼겹 숙주 볶음", beef),
+                    ("우삼겹 숙주 볶음 (마라)", beef_mara),
                     ("카나페", canp), ("후라이", egg),
-                    ("가라아게", chick), ("버터 새우", shrp),
+                    ("치킨 난반", chickN), ("유린기", chickU), ("버터 새우", shrp),
+                    ("핫도그", hot_dog), ("아망추", ice_mango),
                     ("블루 라군", blue), ("스크루 드라이버", screw),
                     ("미도리 사워", mid), ("시 브리즈", sea),
                     ("트로피컬 선라이즈", trop),
@@ -237,9 +251,9 @@ elif page == "통계 페이지":
     # 각 메뉴별 주문량 합계 조회
     c.execute(
         '''SELECT
-            SUM(cheese_cake), SUM(beef_stir_fry), SUM(canape),
-            SUM(fried_egg), SUM(fried_chicken), SUM(butter_shrimp),
-            SUM(blue_lagoon), SUM(screwdriver), SUM(midori),
+            SUM(cheese_cake), SUM(beef_stir_fry),SUM(beef_with_mara), SUM(canape),
+            SUM(fried_egg), SUM(fried_chickenN), SUM(fried_chickenU), SUM(butter_shrimp),
+            SUM(hot_dog), SUM(ice_mango), SUM(blue_lagoon), SUM(screwdriver), SUM(midori),
             SUM(sea_breeze), SUM(tropical), SUM(blue_lagoon_na),
             SUM(screwdriver_na), SUM(midori_na), SUM(sea_breeze_na),
             SUM(tropical_na)
@@ -248,8 +262,8 @@ elif page == "통계 페이지":
     sums = c.fetchone()
 
     columns = [
-        "치즈 감자전", "우삼겹 숙주 볶음", "카나페", "후라이", "가라아게", "버터 새우",
-        "블루 라군", "스크루 드라이버", "미도리 사워", "시 브리즈", "트로피컬 선라이즈",
+        "치즈 감자전", "우삼겹 숙주 볶음", "우삼겹 숙주 볶음 (마라)", "카나페", "후라이", "치킨 난반", "유린기", "버터 새우",
+        "핫도그", "아망추", "블루 라군", "스크루 드라이버", "미도리 사워", "시 브리즈", "트로피컬 선라이즈",
         "블루 라군 (논알콜)", "스크루 드라이버 (논알콜)", "미도리 사워 (논알콜)",
         "시 브리즈 (논알콜)", "트로피컬 선라이즈 (논알콜)"
     ]
